@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { goto } from "$app/navigation";
     import {
         Table,
@@ -43,7 +43,7 @@
                 <TableBodyCell>${item.price}</TableBodyCell>
                 <TableBodyCell>
                     <a
-                        href="/tables"
+                        href="/products-admin/{item.id}"
                         class="font-medium text-primary-600 hover:underline dark:text-primary-500"
                         >Edit</a
                     >
