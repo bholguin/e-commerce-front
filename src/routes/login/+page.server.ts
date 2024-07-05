@@ -2,7 +2,6 @@ import { redirect } from '@sveltejs/kit';
 
 export const actions = {
     default: async ({ cookies, request, fetch}) => {
-        console.log(cookies.getAll())
         const data = await request.formData();
         const email = data.get('username');
         const password = data.get('password');
@@ -17,9 +16,7 @@ export const actions = {
                 password: password,
             }),
         });
-        const headerCookie = response.headers.get("set-cookie")
-        console.log(headerCookie);
-        
+        const headerCookie = response.headers.get("set-cookie")        
         const splitCookie = headerCookie?.split(";") as Array<string>
         const cookie = splitCookie[0].split("=") as Array<string>
         let options: any = {
@@ -33,6 +30,5 @@ export const actions = {
         const info = await response.json();
         console.log(info);
         throw redirect(303, "/")
-        
     }
 };

@@ -16,10 +16,14 @@
                 ...options,
                 {
                     label: "Productos",
-                    route: "/products",
+                    route: "/products-admin",
                 },
                 {
                     label: "Ordenes",
+                    route: "/orders",
+                },
+                {
+                    label: "Mis Ordenes",
                     route: "/orders",
                 },
             ];
@@ -44,4 +48,7 @@
 </script>
 
 <NavBar {options} isLogged={data.post.isLogged}/>
-<slot />
+<section class="px-12 pt-4">
+    <slot />
+</section>
+
