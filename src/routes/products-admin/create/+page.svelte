@@ -1,0 +1,20 @@
+<script lang="ts">
+    import { goto } from "$app/navigation";
+    import InputText from "$lib/input-text/InputText.svelte";
+    import InputTextarea from "$lib/input-textarea/InputTextarea.svelte";
+    import { Modal, Button } from "flowbite-svelte";
+    let closeProduct = () => goto("/products-admin");
+</script>
+
+<form method="POST" >
+    <Modal title="Crear Producto" open on:close={closeProduct}>
+        <InputText label="Nombre" name="nombre" required />
+        <InputTextarea label="Description" name="descripcion" required />
+        <InputText label="Precio" type="number" name="precio" required />
+        <InputText label="Stock" type="number" name="stock" required />
+        <svelte:fragment slot="footer">
+            <Button type="submit" color="dark">SAVE</Button>
+            <Button type="button" color="alternative" on:click={closeProduct}>CANCEL</Button>
+        </svelte:fragment>
+    </Modal>
+</form>

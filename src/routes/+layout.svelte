@@ -16,7 +16,7 @@
                 ...options,
                 {
                     label: "Productos",
-                    route: "/products",
+                    route: "/products-admin",
                 },
                 {
                     label: "Ordenes",
@@ -44,4 +44,7 @@
 </script>
 
 <NavBar {options} isLogged={data.post.isLogged}/>
-<slot />
+<section class="px-12">
+    <slot />
+</section>
+
