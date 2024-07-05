@@ -22,6 +22,10 @@
                     label: "Ordenes",
                     route: "/orders",
                 },
+                {
+                    label: "Mis Ordenes",
+                    route: "/orders",
+                },
             ];
         } else {
             options = [
@@ -44,7 +48,7 @@
 </script>
 
 <NavBar {options} isLogged={data.post.isLogged}/>
-<section class="px-12">
+<section class="px-12 pt-4">
     <slot />
 </section>
 

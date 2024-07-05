@@ -46,6 +46,11 @@
                         href="/products-admin/{item.id}"
                         class="font-medium text-primary-600 hover:underline dark:text-primary-500"
                         >Edit</a
+                    > |
+                    <a
+                        href="/products-admin/{item.id}"
+                        class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                        >Remove</a
                     >
                 </TableBodyCell>
             </TableBodyRow>
