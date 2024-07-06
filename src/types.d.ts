@@ -16,3 +16,9 @@ export interface NavBarOption {
     route: string;
     hasOrders?: boolean;
 }
+
+export interface OrderProduct  {
+    amount: number
+    price: number
+    productId: number
+}

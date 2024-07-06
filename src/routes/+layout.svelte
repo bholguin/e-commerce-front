@@ -58,6 +58,6 @@
 </script>
 
 <NavBar {options} isLogged={data.post.isLogged} />
-<section class="px-12 pt-4">
+<section class="px-12 py-6">
     <slot />
 </section>

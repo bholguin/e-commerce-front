@@ -1,6 +1,7 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import {currency} from "../../helpers/currency"
+    import { onMount } from "svelte";
+    import { currency } from "../../helpers/currency";
     import {
         Table,
         TableBody,
@@ -10,9 +11,43 @@
         TableHeadCell,
         Button,
     } from "flowbite-svelte";
+    import type { Product } from "../../types";
+    import {TrashBinSolid, EditSolid} from "flowbite-svelte-icons"
+
+    let products: Array<Product> = [];
 
     let creteProduct = () => goto("/products-admin/create");
-    export let data;
+    let goToEdit = (id: number | undefined) => goto("/products-admin/"+id)
+    const load = async () => {
+        try {
+            const response = await fetch(
+                "http://localhost:3000/api/products-admin",
+                {
+                    credentials: "include",
+                },
+            );
+
+            if (response.status >= 401 && response.status <= 403) {
+                goto("/login");
+            }
+            const data = await response.json();
+            products = data;
+        } catch (e) {}
+    };
+
+    const removeProduct = async (id: number | undefined) => {
+        try {
+            await fetch("http://localhost:3000/api/product/" + id, {
+                method: "delete",
+                credentials: "include",
+            });
+            await load();
+        } catch (e) {}
+    };
+
+    onMount(() => {
+        load();
+    });
 </script>
 
 <caption
@@ -36,23 +71,15 @@
         </TableHeadCell>
     </TableHead>
     <TableBody tableBodyClass="divide-y">
-        {#each data.post as item}
+        {#each products as item}
             <TableBodyRow>
                 <TableBodyCell>{item.name}</TableBodyCell>
                 <TableBodyCell>{item.description}</TableBodyCell>
                 <TableBodyCell>{item.stock}</TableBodyCell>
-                <TableBodyCell>{currency.format(item.price) }</TableBodyCell>
-                <TableBodyCell>
-                    <a
-                        href="/products-admin/{item.id}"
-                        class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                        >Edit</a
-                    > |
-                    <a
-                        href="/products-admin/{item.id}"
-                        class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                        >Remove</a
-                    >
+                <TableBodyCell>{currency.format(item.price)}</TableBodyCell>
+                <TableBodyCell tdClass="flex justify-center items-center gap-1 py-2">
+                    <Button size="sm" color="alternative" on:click={() => goToEdit(item.id)}><EditSolid /></Button
+                    ><Button size="sm" color="dark" on:click={() => removeProduct(item.id)}> <TrashBinSolid  /></Button>
                 </TableBodyCell>
             </TableBodyRow>
         {/each}
