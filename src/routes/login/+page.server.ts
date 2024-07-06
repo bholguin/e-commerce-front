@@ -27,8 +27,7 @@ export const actions = {
             path: "/"
         };
         cookies.set(cookie[0], cookie[1], options)
-        const info = await response.json();
-        console.log(info);
+
         throw redirect(303, "/")
     }
 };

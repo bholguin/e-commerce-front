@@ -1,14 +1,12 @@
-export async function load({fetch}) {
+import type { User } from '../types.js';
+
+export async function load({ fetch }) {
     const response = await fetch("http://localhost:3000/api/user", {
         credentials: 'include',
     });
-    console.log(response.status)
-    const data = await response.json();
-    console.log(data, "data user");
+    const data: User = await response.json();
     return {
-        post: {
-            isLogged: response.status === 200 ? true : false, 
-            user: data
-        }
+        isLogged: response.status === 200 ? true : false,
+        user: data
     };
 }
