@@ -12,7 +12,7 @@
 
     const unsubscribe = orders.subscribe((val) => {
         od = val;
-        return browser && (localStorage.orders = JSON.stringify(val));
+        return browser && (sessionStorage.orders = JSON.stringify(val));
     });
 
     const addProduct = () => {
@@ -29,7 +29,7 @@
 </script>
 
 <div class="space-y-4">
-    <Card img="" horizontal={horizontal}>
+    <Card horizontal={horizontal}>
         <h5
             class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
         >

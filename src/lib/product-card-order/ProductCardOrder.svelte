@@ -17,7 +17,7 @@
 </script>
 
 <div class="space-y-4">
-    <Card img="" horizontal={true}>
+    <Card >
         <div>
             <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"

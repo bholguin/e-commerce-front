@@ -1,14 +1,10 @@
 <script lang="ts">
+    import { goto } from "$app/navigation";
     import NavBar from "$lib/navbar/NavBar.svelte";
-    import { orders } from "../store";
     import "../app.css";
     import type { NavBarOption } from "../types";
 
     export let data;
-    let numOrders = 0;
-    orders.subscribe((val) => {
-        numOrders = val.length;
-    });
 
     let options: Array<NavBarOption> = [
         {
@@ -17,8 +13,8 @@
         },
     ];
 
-    if (data.post.isLogged) {
-        if (data.post.user.isAdmin) {
+    if (data.isLogged) {
+        if (data.user.isAdmin) {
             options = [
                 ...options,
                 {
@@ -55,9 +51,20 @@
             },
         ];
     }
+
+    let Logout = async () => {
+        console.log("logout");
+        await fetch("http://localhost:5173?/logout", {
+            method: "post",
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        document.location.reload()
+    };
 </script>
 
-<NavBar {options} isLogged={data.post.isLogged} />
+<NavBar {options} isLogged={data.isLogged} user={data.user} logout={Logout} />
 <section class="px-12 py-6">
     <slot />
 </section>

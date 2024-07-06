@@ -5,7 +5,6 @@ import type { Product } from '../../../types.js';
 export const actions = {
     default: async ({request, fetch}) => {
         const data = await request.formData();
-console.log(data);
 
         const product: Product = {
             description: data.get('descripcion') as string,

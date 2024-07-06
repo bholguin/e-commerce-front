@@ -26,13 +26,11 @@
                     credentials: "include",
                 },
             );
-
-            if (response.status >= 401 && response.status <= 403) {
-                goto("/login");
-            }
             const data = await response.json();
             products = data;
-        } catch (e) {}
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     const removeProduct = async (id: number | undefined) => {

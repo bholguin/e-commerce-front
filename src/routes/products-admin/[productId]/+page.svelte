@@ -3,7 +3,6 @@
     import InputText from "$lib/input-text/InputText.svelte";
     import InputTextarea from "$lib/input-textarea/InputTextarea.svelte";
     import { Modal, Button } from "flowbite-svelte";
-    import type { Product } from "../../../types";
     let closeProduct = () => goto("/products-admin");
     export let data;
 </script>
