@@ -1,9 +1,16 @@
-<script>
+<script lang="ts">
     import NavBar from "$lib/navbar/NavBar.svelte";
+    import { orders } from "../store";
     import "../app.css";
-    export let data;
+    import type { NavBarOption } from "../types";
 
-    let options = [
+    export let data;
+    let numOrders = 0;
+    orders.subscribe((val) => {
+        numOrders = val.length;
+    });
+
+    let options: Array<NavBarOption> = [
         {
             label: "Home",
             route: "/",
@@ -24,7 +31,8 @@
                 },
                 {
                     label: "Mis Ordenes",
-                    route: "/orders",
+                    route: "/my-orders",
+                    hasOrders: true,
                 },
             ];
         } else {
@@ -32,23 +40,24 @@
                 ...options,
                 {
                     label: "Mis Ordenes",
-                    route: "/orders",
+                    route: "/my-orders",
+                    hasOrders: true,
                 },
             ];
         }
     } else {
         options = [
-                ...options,
-                {
-                    label: "Mis Ordenes",
-                    route: "/orders",
-                }
-            ];
+            ...options,
+            {
+                label: "Mis Ordenes",
+                route: "/my-orders",
+                hasOrders: true,
+            },
+        ];
     }
 </script>
 
-<NavBar {options} isLogged={data.post.isLogged}/>
+<NavBar {options} isLogged={data.post.isLogged} />
 <section class="px-12 pt-4">
     <slot />
 </section>
-

@@ -1,5 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
+    import {currency} from "../../helpers/currency"
     import {
         Table,
         TableBody,
@@ -40,7 +41,7 @@
                 <TableBodyCell>{item.name}</TableBodyCell>
                 <TableBodyCell>{item.description}</TableBodyCell>
                 <TableBodyCell>{item.stock}</TableBodyCell>
-                <TableBodyCell>${item.price}</TableBodyCell>
+                <TableBodyCell>{currency.format(item.price) }</TableBodyCell>
                 <TableBodyCell>
                     <a
                         href="/products-admin/{item.id}"
