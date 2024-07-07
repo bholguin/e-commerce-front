@@ -7,6 +7,8 @@ Aplicación front svelte para aplicar como Front End developer en LinkTIC
 
 una vez clonado el proyecto e instaladas las dependencias usando `npm install` (o `pnpm install` o `yarn`), iniciar el servidor de desarrollo de la siguiente manera:
 
+debes copiar el contenido del archivo `.env-example` a `.env`, luego debe correr el siguientes comandos: 
+
 ```bash
 npm run dev
 
