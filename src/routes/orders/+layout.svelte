@@ -1,6 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import { EyeSolid, TruckSolid } from "flowbite-svelte-icons";
+    import { EyeSolid } from "flowbite-svelte-icons";
     import {currency} from "../../helpers/currency"
     import {
         Table,
@@ -11,29 +11,12 @@
         TableHeadCell,
         Button,
     } from "flowbite-svelte";
-    import { onMount } from "svelte";
     import { DateFormat } from "../../helpers/dateFormat";
 
     const goToDetails = (id: number | undefined) => goto("/orders/"+id)
 
-    let orders: Array<any> = []
-
-    const load = async () => {
-        try {
-            const response = await fetch(
-                "http://localhost:3000/api/orders",
-                {
-                    credentials: "include",
-                },
-            );
-            const data = await response.json();
-            orders = data;
-        } catch (e) {}
-    };
-
-    onMount(() => {
-        load();
-    })
+    export let data
+    const {orders} = data 
 </script>
 
 <caption

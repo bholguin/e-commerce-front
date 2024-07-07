@@ -13,7 +13,6 @@
 
     export let isLogged: Boolean = false;
     export let options: Array<NavBarOption> = [];
-    export let logout: () => void;
     export let user: User;
 </script>
 
@@ -53,7 +52,7 @@
                 >LOG IN</Button
             >
         {:else}
-            <Avatar {user} logout={logout}/>
+            <Avatar {user} />
         {/if}
     </NavUl>
 </Navbar>

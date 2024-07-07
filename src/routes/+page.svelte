@@ -1,26 +1,7 @@
 <script lang="ts">
     import ProductCard from "$lib/product-card/ProductCard.svelte";
-    import { onMount } from "svelte";
-    import type { Product } from "../types.js";
- 
-    let products: Array<Product> = []
-    const load = async () => {
-        const response = await fetch("http://localhost:3000/api/products", {
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        const data = await response.json();
-        products = data as Array<Product>
-    };
-
-    onMount(() => {
-        load()
-    })
-
-
+    export let data
+    const {products} = data
 </script>
 
 <div class="flex flex-col gap-12">

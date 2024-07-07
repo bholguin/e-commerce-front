@@ -4,14 +4,14 @@
     import { orders } from "../../store";
     import { browser } from "$app/environment";
     import { onDestroy } from "svelte";
-        import {currency} from "../../helpers/currency"
+    import { currency } from "../../helpers/currency";
     export let product: Product;
-    export let horizontal: boolean | undefined = undefined
+    export let horizontal: boolean | undefined = undefined;
 
-    let od: Array<UserOrder> = [];
+    let _orders: Array<UserOrder> = [];
 
     const unsubscribe = orders.subscribe((val) => {
-        od = val;
+        _orders = val;
         return browser && (sessionStorage.orders = JSON.stringify(val));
     });
 
@@ -25,11 +25,13 @@
         ];
     };
 
+    $: s = !!$orders.find((item) => item.product.id === product.id);
+
     onDestroy(unsubscribe);
 </script>
 
 <div class="space-y-4">
-    <Card horizontal={horizontal}>
+    <Card {horizontal}>
         <h5
             class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
         >
@@ -45,7 +47,7 @@
         >
             {currency.format(product.price)}
         </p>
-        {#if  !od.find((item) => item.product.id === product.id)}
+        {#if s}
             <Button color="dark" on:click={addProduct}>Agregar</Button>
         {/if}
     </Card>

@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { goto } from "$app/navigation";
     import NavBar from "$lib/navbar/NavBar.svelte";
     import "../app.css";
     import type { NavBarOption } from "../types";
@@ -52,19 +51,9 @@
         ];
     }
 
-    let Logout = async () => {
-        console.log("logout");
-        await fetch("http://localhost:5173?/logout", {
-            method: "post",
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        });
-        document.location.reload()
-    };
 </script>
 
-<NavBar {options} isLogged={data.isLogged} user={data.user} logout={Logout} />
+<NavBar {options} isLogged={data.isLogged} user={data.user} />
 <section class="px-12 py-6">
     <slot />
 </section>

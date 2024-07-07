@@ -1,5 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { Product } from '../../../types.js';
+import { API_URL } from '$env/static/private';
 
 
 export const actions = {
@@ -13,7 +14,7 @@ export const actions = {
             stock: parseInt(data.get('stock') as string),
         }
 
-        const response = await fetch("http://localhost:3000/api/product", {
+        const response = await fetch(`${API_URL}/product`, {
             method: "post",
             credentials: 'include',
             headers: {

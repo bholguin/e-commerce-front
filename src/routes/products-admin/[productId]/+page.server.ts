@@ -1,6 +1,16 @@
 import { redirect } from '@sveltejs/kit';
 import type { Product } from '../../../types.js';
+import { API_URL } from '$env/static/private';
 
+export async function load({ params, fetch }) {
+    const response = await fetch(`${API_URL}/product/${params.productId}`, {
+        credentials: 'include',
+    });
+    const data = await response.json();
+    return {
+        product: data
+    };
+}
 
 export const actions = {
     default: async ({request, fetch, params}) => {
@@ -13,7 +23,7 @@ export const actions = {
             stock: parseInt(data.get('stock') as string),
         }
 
-        const response = await fetch("http://localhost:3000/api/product/"+params.productId, {
+        const response = await fetch(`${API_URL}/product/${params.productId}`, {
             method: "put",
             credentials: 'include',
             headers: {

@@ -19,9 +19,12 @@
     import { goto } from "$app/navigation";
     import { DateFormat } from "../../helpers/dateFormat";
 
+    export let data;
+    const { API_URL, isLogged } = data;
+
     let od: Array<UserOrder> = [];
 
-        const goToDetails = (id: number | undefined) => goto("/my-orders/"+id)
+    const goToDetails = (id: number | undefined) => goto("/my-orders/" + id);
 
     const unsubscribe = orders.subscribe((val) => {
         od = val;
@@ -56,7 +59,7 @@
             total: total,
         };
         try {
-            const response = await fetch("http://localhost:3000/api/order", {
+            await fetch(`${API_URL}/order`, {
                 method: "post",
                 credentials: "include",
                 headers: {
@@ -70,22 +73,14 @@
     };
 
     let user_orders: Array<any> = [];
-    let isLogged: boolean = false;
+
     const load = async () => {
         try {
-            const response = await fetch(
-                "http://localhost:3000/api/user-orders",
-                {
-                    credentials: "include",
-                },
-            );
+            const response = await fetch(`${API_URL}/user-orders`, {
+                credentials: "include",
+            });
             const data = await response.json();
-            if (response.status >= 401 && response.status <= 403) {
-                isLogged = false;
-            } else {
-                user_orders = data;
-                isLogged = true;
-            }
+            user_orders = data;
         } catch (e) {}
     };
 
@@ -165,7 +160,9 @@
                         class="w-[100px] rigth">Ordenar</Button
                     >
                     {#if !isLogged}
-                        <h5 class="text-sm">Debes hacer login para realizar tu orden</h5>
+                        <h5 class="text-sm">
+                            Debes hacer login para realizar tu orden
+                        </h5>
                     {/if}
                 </div>
             </Card>
@@ -190,14 +187,22 @@
             <TableBody tableBodyClass="divide-y">
                 {#each user_orders as item}
                     <TableBodyRow>
-                        <TableBodyCell>{item.id}</TableBodyCell>
-                        <TableBodyCell>{DateFormat(item.createAt)}</TableBodyCell>
+                        <TableBodyCell>#{item.id}</TableBodyCell>
+                        <TableBodyCell
+                            >{DateFormat(item.createAt)}</TableBodyCell
+                        >
                         <TableBodyCell
                             >{currency.format(item.total)}</TableBodyCell
                         >
-                        <TableBodyCell tdClass="flex justify-center items-center gap-1 py-2">
-                            <Button size="sm" color="alternative" on:click={() => goToDetails(item.id)}><EyeSolid /></Button
-                                >
+                        <TableBodyCell
+                            tdClass="flex justify-center items-center gap-1 py-2"
+                        >
+                            <Button
+                                size="sm"
+                                color="alternative"
+                                on:click={() => goToDetails(item.id)}
+                                ><EyeSolid /></Button
+                            >
                         </TableBodyCell>
                     </TableBodyRow>
                 {/each}
