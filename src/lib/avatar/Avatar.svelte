@@ -14,7 +14,7 @@
   <DropdownHeader>
     <span class="block text-sm">{user.username}</span>
   </DropdownHeader>
-  <form method="post" action="?/logout">
+  <form method="post" action="/?/logout">
     <button type="submit" ><DropdownItem>Sign out</DropdownItem></button>
   </form>
 </Dropdown>

@@ -25,7 +25,7 @@
         ];
     };
 
-    $: s = !!$orders.find((item) => item.product.id === product.id);
+    $: s = !$orders.find((item) => item.product.id === product.id);
 
     onDestroy(unsubscribe);
 </script>
