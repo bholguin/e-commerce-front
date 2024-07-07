@@ -19,7 +19,7 @@
     let goToEdit = (id: number | undefined) => goto("/products-admin/"+id)
 </script>
 
-<caption
+<div
     class="flex flex-row justify-between items-center p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800"
 >
     <h1
@@ -28,7 +28,7 @@
         Productos
     </h1>
     <Button color="dark" class="h-12" on:click={creteProduct}>CREAR</Button>
-</caption>
+</div>
 <Table shadow>
     <TableHead>
         <TableHeadCell>Nombre</TableHeadCell>

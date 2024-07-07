@@ -19,7 +19,7 @@
     const {orders} = data 
 </script>
 
-<caption
+<div
     class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800 flex justify-between items-center"
 >
     <h1
@@ -27,7 +27,7 @@
     >
         Ordenes
     </h1>
-</caption>
+</div>
 <Table shadow>
     <TableHead>
         <TableHeadCell>Numero</TableHeadCell>
