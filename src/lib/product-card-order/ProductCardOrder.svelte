@@ -11,7 +11,9 @@
 
     const onInput = (e: any) => {
         const newAmount = e.target.value as number
-        inputAmount(product.id, newAmount)
+        if(newAmount > 0) {
+            inputAmount(product.id, newAmount)
+        }
     }
 
 </script>
@@ -35,7 +37,7 @@
                 {currency.format(product.price)}
             </p>
             <div class="gap-4 flex flex-col justify-center items-end">
-                <InputText label="Cantidad:" type="number" bind:value={userOrder.amount} input={onInput}/>
+                <InputText label="Cantidad:" type="number" bind:value={userOrder.amount} input={onInput} min={1}/>
                 <Button class="w-[40%]" color="red" on:click={() => removeOrder(product.id)}>Remove</Button>
             </div>
            

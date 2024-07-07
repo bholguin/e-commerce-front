@@ -9,9 +9,10 @@
     export let type: InputType | undefined = "text"
     export let value: string | number | undefined = undefined
     export let input: (e: Event) => void | undefined = () => {}
+    export let min: number
 </script>
 
 <div class="w-full">
     <label for={name} class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label}</label>
-    <Input on:input={input} value={value} type={type} name={name} id={id} disabled={disabled} placeholder={placeholder} required={required} />
+    <Input on:input={input} min={min} value={value} type={type} name={name} id={id} disabled={disabled} placeholder={placeholder} required={required} />
 </div>
